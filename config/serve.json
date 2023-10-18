@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://fecon.sharepoint.com/sites/devdr/KSDG/SitePages/Home.aspx",
+      "customActions": {
+        "02325ef9-b5cd-4e34-9e8f-0e0dbc2c5587": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "pageUrl": "https://fecon.sharepoint.com/sites/devdr/KSDG/SitePages/Home.aspx",
+      "customActions": {
+        "02325ef9-b5cd-4e34-9e8f-0e0dbc2c5587": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    }
+  }
+}
