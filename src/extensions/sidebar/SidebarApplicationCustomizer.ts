@@ -56,16 +56,17 @@ export default class SidebarApplicationCustomizer
     
    
     this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
-    $('#modal').css('display','flex');
+    // $('#modal').css('display','flex');
     const navElement = document.getElementById('spLeftNav') as HTMLElement;
     const siteHeader = document.getElementById('spSiteHeader') as HTMLElement;
     const appBar = document.getElementById('sp-appBar') as HTMLElement;
+    navElement.innerHTML="";
     appBar.setAttribute('style','display:none');
     siteHeader.setAttribute('style','display:none');
     navElement.setAttribute("style","width:18vw");
     const url = `/_api/Web/Lists?$filter=BaseTemplate eq 101`;
     this._getListData(url)
-    .then((response) => {
+    .then(async (response) => {
       let items = `<div class="${styles.menu}">
                     <p class="${styles.title}">Quản lý tài liệu</p>
                     <ul>`;
@@ -76,20 +77,27 @@ export default class SidebarApplicationCustomizer
           <li>
             <a href="#">
               <i class="fa-solid fa-landmark"></i>
-              <span>${lib.Title}</span>
-              <i class="arrow fa-solid fa-angle-down"></i>
-            </a>
-            <ul class="${styles.sub_menu}">
-              <li>
-                <a href="#">
-                  <i class="fa-solid fa-folder-open"></i>
-                  <span>${lib.Title}</span>
-                  <i class="arrow fa-solid fa-angle-down"></i>
-                </a>
-              </li>
-            </ul>
-          </li>
-        `;
+              <span>${lib.Title}</span>`;
+              // /_api/web/lists/getbytitle('${lib.Title}')/Items?$select=FileRef&$expand=Folder&$select=Title,Folder/ServerRelativeUrl
+            await this._getListData(`/_api/web/lists/getbytitle('${lib.Title}')/Items?$select=*,FileDirRef&$&$expand=Folder&$select=Title,Folder/ServerRelativeUrl`).then(async (res) => {
+              console.log(res.value);
+              if (res.value.length > 0) {
+                items += '<i class="arrow fa-solid fa-angle-down"></i></a>';
+              }else{
+                items += '</a>';
+              }
+              
+              items += `<ul class="${styles.sub_menu}">
+                  <li>
+                    <a href="#">
+                      <i class="fa-solid fa-folder-open"></i>
+                      <span>${lib.Title}</span>
+                      <i class="arrow fa-solid fa-angle-down"></i>
+                    </a>
+                  </li>
+                </ul>`;
+            });
+          items += `</li>`;
         }
         
       }
@@ -100,7 +108,7 @@ export default class SidebarApplicationCustomizer
     })
     .catch(err => console.log(err));
 
-     $('#modal').css('display','none');
+    //  $('#modal').css('display','none');
     return Promise.resolve();
   }
 
@@ -164,7 +172,7 @@ export default class SidebarApplicationCustomizer
       $(this).toggleClass('active');
       $(this).find('ul').slideToggle();
     })
-  
+    
   } 
 
 private _getListData(url : string) : Promise<any>{
