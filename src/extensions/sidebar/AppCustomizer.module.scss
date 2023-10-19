@@ -2,14 +2,14 @@
 
 .app {
   .top {
-      height:60px;
+      height:50px;
       text-align:center;
       line-height:2.5;
       font-weight:bold;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $ms-color-themePrimary;
+      background-color: #f0f0f0;
       color: $ms-color-white;
 
   }
@@ -89,17 +89,76 @@
         }
     }
 
-    // side bar
-
-    .menu .title{
-        font-size: 13px;
-        font-weight: 500;
-        color: #757575;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-
-    .text{
-        color: #757575;
-    }
+    
+    
   }
+
+  // side bar
+
+    .menu {
+        .title{
+            font-size: 20px;
+            font-weight: 600;
+            color: #757575;
+            text-transform: uppercase;
+            margin: 0px;
+            padding: 0px 8px;
+        }
+
+        ul{
+            margin: 0px;
+            padding: 0px;
+            li{
+                list-style: none;
+                margin-bottom: 5px;
+                a{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 15px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    padding: 12px 8px;
+                    border-radius: 8px;
+                    color: #757575;
+                    transition: all 0.3s;
+                }
+            }
+
+            li span{
+                flex: 1;
+            }
+
+            li > a :hover,
+            li.active > a {
+                color: #F0682E;
+            }
+
+            li .icon {
+                font-size: 20px;
+            }
+
+            li .arrow {
+                font-size: 14px;
+            }
+
+
+        }
+        .text{
+            color: #757575;
+        }
+
+        .sub_menu{
+            display: none;
+            margin-left: 20px;
+            padding-left: 20px;
+            padding-top: 5px;
+            border-left: 1px solid #f6f6f6;
+        }
+
+        .sub_menu li a{
+            padding: 12px 8px;
+            font-size: 12px;
+        }
+        
+    }
