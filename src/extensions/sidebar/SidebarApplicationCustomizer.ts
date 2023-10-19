@@ -56,7 +56,7 @@ export default class SidebarApplicationCustomizer
     
    
     this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
-
+    $('#modal').css('display','flex');
     const navElement = document.getElementById('spLeftNav') as HTMLElement;
     const siteHeader = document.getElementById('spSiteHeader') as HTMLElement;
     const appBar = document.getElementById('sp-appBar') as HTMLElement;
@@ -95,10 +95,12 @@ export default class SidebarApplicationCustomizer
       }
 
       items +=`</ul></div>`;
-      navElement.innerHTML  =items ;
+      navElement.innerHTML=items ;
       
     })
     .catch(err => console.log(err));
+
+     $('#modal').css('display','none');
     return Promise.resolve();
   }
 
@@ -138,7 +140,7 @@ export default class SidebarApplicationCustomizer
             
           </div>
         </div>
-        <div class="${styles.modal}">
+        <div id="modal" class="${styles.modal}">
           <div class="${styles.modal_overlay}"></div>
           <div class="${styles.modal_body}">
             <div class="${styles.modal_inner}">
